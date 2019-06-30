@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     catch(std::exception ex)
     {
         ErrorMsg(ex.what());
+        QCoreApplication::exit();
     }
 
     m_settingsfilepath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
@@ -127,5 +128,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionSet_Font_triggered()
 {
-    m_pReportText->setFont(QFontDialog::getFont(0, m_pReportText->font()));
+    if(m_pReportText)
+    {
+        m_pReportText->setFont(QFontDialog::getFont(nullptr, m_pReportText->font()));
+    }
 }
