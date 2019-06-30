@@ -1,5 +1,13 @@
 #include "mainwindow.h"
 #include <QApplication>
+#include <QMessageBox>
+
+static void ErrorMsg(const char* msg)
+{
+    QMessageBox mb;
+    mb.setText(msg);
+    mb.exec();
+}
 
 int main(int argc, char *argv[])
 {
@@ -7,8 +15,21 @@ int main(int argc, char *argv[])
     a.setApplicationName("QArmSkills");
     a.setOrganizationName("RunnerScrab");
     a.setOrganizationDomain("N/A");
-    MainWindow w;
-    w.show();
+    MainWindow* pW = nullptr;
+    try
+    {
+        pW = new MainWindow();
+    }
+    catch(std::exception ex)
+    {
+        ErrorMsg(ex.what());
+        return 0;
+    }
 
-    return a.exec();
+    pW->show();
+
+    int retval = a.exec();
+
+    delete pW;
+    return retval;
 }

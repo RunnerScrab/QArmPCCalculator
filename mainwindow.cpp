@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QLayout>
-#include <QMessageBox>
 #include <QFontDialog>
 #include <QScrollBar>
 #include <QTextCursor>
@@ -14,28 +13,14 @@
 #include "PC_Class.h"
 #include "Skill.h"
 
-static void ErrorMsg(const char* msg)
-{
-    QMessageBox mb;
-    mb.setText(msg);
-    mb.exec();
-}
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    try
-    {
-        m_spSkillsDb = std::make_unique<SkillsDB>();
-    }
-    catch(std::exception ex)
-    {
-        ErrorMsg(ex.what());
-        QCoreApplication::exit();
-    }
+
+    m_spSkillsDb = std::make_unique<SkillsDB>(); // This will throw if db file isn't found
 
     m_settingsfilepath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 
