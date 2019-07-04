@@ -107,11 +107,11 @@ void Character::ProcessClassSkills()
 					skillname += "]";
 				}
 				std::string level = "(" + std::string(Skill::LevelEnumTypeToStr(sk.m_maxlevel)) + ")";
-				int numspaces = max(((38 - skillname.length()) - level.length()), static_cast<unsigned int>(0));
+                size_t numspaces = max(((38 - skillname.length()) - level.length()), static_cast<size_t>(0));
 
 				skillclass_report << skillname;
 
-				for (int j = 0; j < numspaces; ++j)
+                for (size_t j = 0; j < numspaces; ++j)
 				{
 					//Spaces between skill name and its max level
 					skillclass_report << " ";
@@ -144,7 +144,7 @@ void Character::ProcessClassSkills()
 		for (PC_Class_Skill* pSkill : overlappingskills)
 		{
 			skill_report << pSkill->m_baseSkill->m_name << ": ";
-			for (int i = 0, z = pSkill->m_combinationeffects.size(); i < z; ++i)
+            for (size_t i = 0, z = pSkill->m_combinationeffects.size(); i < z; ++i)
 			{
 				skill_report << pSkill->m_combinationeffects[i];
 				if (i < (z - 1))
