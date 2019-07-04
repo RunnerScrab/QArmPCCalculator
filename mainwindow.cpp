@@ -21,8 +21,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    m_spSkillsDb = new SkillsDB(); // This will throw if db file isn't found
-
     m_settingsfilepath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 
     m_pMainComboBox = findChild<QComboBox*>(QString("mainguildComboBox"));
@@ -35,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     if(m_pMainComboBox && m_pSubComboBox)
     {
-        const auto& rClassMap = m_spSkillsDb->GetClassMap();
+        const auto& rClassMap = m_SkillsDb.GetClassMap();
         for (auto& clpair : rClassMap)
         {
             if (!clpair.second.IsSubclass())
@@ -90,7 +88,7 @@ void MainWindow::comboBoxesChanged()
     std::string mainguildstr = m_pMainComboBox->currentText().toStdString();
     std::string subguildstr =  m_pSubComboBox->currentText().toStdString();
 
-    std::shared_ptr<Character> pChar = m_spSkillsDb->CreateCharacter(
+    std::shared_ptr<Character> pChar = m_SkillsDb.CreateCharacter(
         mainguildstr != "*NONE" ? mainguildstr.c_str() : nullptr,
         subguildstr != "*NONE" ? subguildstr.c_str() : nullptr);
     if (pChar)
@@ -109,7 +107,6 @@ void MainWindow::closeEvent(QCloseEvent* event)
 
 MainWindow::~MainWindow()
 {
-    delete m_spSkillsDb;
     delete ui;
 }
 

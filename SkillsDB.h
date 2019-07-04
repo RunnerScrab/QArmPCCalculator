@@ -32,7 +32,7 @@ public:
 	std::shared_ptr<Character> CreateCharacter(const char* mg, const char* sg);
 
 private:
-	int LoadRows(const char * tablename, unsigned int expected_columns,
+    int LoadRows(const char * tablename, int expected_columns,
         std::function<void(QSqlQuery *)> fpRowCallback);
 	int LoadSkills(std::map<std::string, Skill>& skill_map);
 	int LoadPCClasses(std::map<std::string, PC_Class>& pc_class_map);

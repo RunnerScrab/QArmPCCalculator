@@ -31,6 +31,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <QVariant>
 #include <QMessageBox>
 #include <QString>
+#include <QtSql/QSqlRecord>
 
 #include <memory>
 
@@ -93,13 +94,18 @@ std::shared_ptr<Character> SkillsDB::CreateCharacter(const char * mg, const char
 	return pc_out;
 }
 
-int SkillsDB::LoadRows(const char * tablename, unsigned int expected_columns,
+int SkillsDB::LoadRows(const char * tablename, int expected_columns,
     std::function<void(QSqlQuery*)> fpRowCallback)
 {
     std::string querystr = "select * from " + std::string(tablename) + ";";
     QSqlQuery query(m_db);
     query.prepare(querystr.c_str());
     if(!query.exec())
+    {
+        return -1;
+    }
+
+    if(query.record().count() != expected_columns)
     {
         return -1;
     }

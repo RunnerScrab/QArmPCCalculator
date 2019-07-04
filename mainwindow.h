@@ -34,7 +34,7 @@ private:
     void closeEvent(QCloseEvent* event) override;
 
     Ui::MainWindow *ui;
-    SkillsDB* m_spSkillsDb;
+    SkillsDB m_SkillsDb;
     QComboBox* m_pMainComboBox;
     QComboBox* m_pSubComboBox;
     QPlainTextEdit* m_pReportText;
