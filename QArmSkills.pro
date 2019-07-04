@@ -30,6 +30,7 @@ SOURCES += \
         PC_Class_Skill.cpp \
         Skill.cpp \
         SkillsDB.cpp \
+        armskillsexception.cpp \
         main.cpp \
         mainwindow.cpp
 
@@ -39,6 +40,7 @@ HEADERS += \
         PC_Class_Skill.h \
         Skill.h \
         SkillsDB.h \
+        armskillsexception.h \
         mainwindow.h
 
 FORMS += \

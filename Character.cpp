@@ -26,6 +26,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <string>
 #include <sstream>
 #include <set>
+#include <cstring>
 
 #define max(a, b) (a > b ? a : b)
 

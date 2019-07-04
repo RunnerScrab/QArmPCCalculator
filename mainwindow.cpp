@@ -6,6 +6,7 @@
 #include <QTextCursor>
 #include <QStandardPaths>
 #include <QDir>
+#include <memory>
 
 #include <exception>
 #include "SkillsDB.h"
@@ -20,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    m_spSkillsDb = std::make_unique<SkillsDB>(); // This will throw if db file isn't found
+    m_spSkillsDb = new SkillsDB(); // This will throw if db file isn't found
 
     m_settingsfilepath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 
@@ -108,6 +109,7 @@ void MainWindow::closeEvent(QCloseEvent* event)
 
 MainWindow::~MainWindow()
 {
+    delete m_spSkillsDb;
     delete ui;
 }
 

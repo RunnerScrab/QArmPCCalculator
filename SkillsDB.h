@@ -5,6 +5,8 @@
 #include <functional>
 #include <map>
 #include <memory>
+#include <exception>
+
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 

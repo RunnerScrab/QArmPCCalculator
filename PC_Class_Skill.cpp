@@ -22,6 +22,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 #include "PC_Class_Skill.h"
+#include "armskillsexception.h"
 
 PC_Class_Skill::SkillEnvironmentType PC_Class_Skill::EnvStringToEnvType(const std::string & str)
 {
@@ -54,7 +55,7 @@ PC_Class_Skill PC_Class_Skill::CombineSkills(PC_Class_Skill * main, PC_Class_Ski
 {
 	if (main->m_baseSkill != sub->m_baseSkill)
 	{
-		throw std::exception("Cannot combine two different skills.\n");
+        throw ArmSkillsException("Cannot combine two different skills.\n");
 	}
 
 

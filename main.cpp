@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include <QMessageBox>
+#include "armskillsexception.h"
 
 static void ErrorMsg(const char* msg)
 {
@@ -20,7 +21,7 @@ int main(int argc, char *argv[])
     {
         pW = new MainWindow();
     }
-    catch(std::exception ex)
+    catch(ArmSkillsException ex)
     {
         ErrorMsg(ex.what());
         return 0;

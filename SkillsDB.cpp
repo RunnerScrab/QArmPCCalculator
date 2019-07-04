@@ -34,6 +34,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include <memory>
 
+#include "armskillsexception.h"
+
 SkillsDB::SkillsDB(const char * dbfilename) :
 	m_dbfilename(dbfilename)
 {
@@ -44,12 +46,12 @@ SkillsDB::SkillsDB(const char * dbfilename) :
     {
         std::string errmsg = "Failed to open db file.";
         m_db.close();
-		throw std::exception(errmsg.c_str());
+        throw ArmSkillsException(errmsg.c_str());
 	}
 
 	if (LoadDatabase() < 0)
 	{
-		throw std::exception("Failed to load data from database.");
+        throw ArmSkillsException("Failed to load data from database.");
 	}
 }
 
